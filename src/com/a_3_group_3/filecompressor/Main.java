@@ -3,7 +3,7 @@ package com.a_3_group_3.filecompressor;
 import com.a_3_group_3.filecompressor.utils.FileUtils;
 import java.io.IOException;
 import java.util.Scanner;
-
+import com.a_3_group_3.filecompressor.analysis.ByteFrequencyCounter;
 import com.a_3_group_3.filecompressor.io.FileReaderUtil;
 
 public class Main {
@@ -17,12 +17,14 @@ public class Main {
       System.out.println("\nFile Name: " + FileUtils.getFileName(filePath));
       System.out.println("File Type: " + FileUtils.getFileExtension(filePath));
       System.out.println("File size: " + data.length + " bytes");
-      System.out.print("First 5 bytes: ");
-      for (int i = 0; i < Math.min(5, data.length); i++) {
-        System.out.print(data[i] + " ");
-      }
-      System.out.println();
       System.out.println("Read Status: SUCCESS");
+      int[] frequency = ByteFrequencyCounter.countFrequencies(data);
+      System.out.println("\nByte Frequencies (non-zero):");
+      for (int i = 0; i < frequency.length; i++) {
+        if (frequency[i] > 0) {
+          System.out.println(i + " : " + frequency[i]);
+        }
+      }
     } catch (IOException e) {
       System.out.println("Read Status: FAILED");
       System.out.println(e.getMessage());

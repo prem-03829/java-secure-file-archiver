@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import com.a_3_group_3.filecompressor.analysis.ByteFrequencyCounter;
 import com.a_3_group_3.filecompressor.io.FileReaderUtil;
+import com.a_3_group_3.filecompressor.compression.HuffmanNode;
+import com.a_3_group_3.filecompressor.compression.HuffmanTreeBuilder;
 
 public class Main {
   public static void main(String[] args) {
@@ -25,6 +27,10 @@ public class Main {
           System.out.println(i + " : " + frequency[i]);
         }
       }
+      HuffmanNode root = HuffmanTreeBuilder.buildTree(frequency);
+      System.out.println("\nHuffman Tree built successfully.");
+      System.out.println("Root Frequency: " + root.frequency);
+
     } catch (IOException e) {
       System.out.println("Read Status: FAILED");
       System.out.println(e.getMessage());

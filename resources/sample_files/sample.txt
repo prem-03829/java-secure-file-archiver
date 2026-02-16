@@ -1,1 +1,4 @@
-Hello World!
+Data compression reduces file size by removing redundancy.
+Huffman coding assigns shorter codes to frequent characters.
+This improves storage efficiency and transmission speed.
+The algorithm works by building a tree based on byte frequency.

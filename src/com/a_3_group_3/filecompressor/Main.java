@@ -7,6 +7,8 @@ import com.a_3_group_3.filecompressor.analysis.ByteFrequencyCounter;
 import com.a_3_group_3.filecompressor.io.FileReaderUtil;
 import com.a_3_group_3.filecompressor.compression.HuffmanNode;
 import com.a_3_group_3.filecompressor.compression.HuffmanTreeBuilder;
+import com.a_3_group_3.filecompressor.compression.HuffmanCodeGenerator;
+import java.util.Map;
 
 public class Main {
   public static void main(String[] args) {
@@ -21,15 +23,14 @@ public class Main {
       System.out.println("File size: " + data.length + " bytes");
       System.out.println("Read Status: SUCCESS");
       int[] frequency = ByteFrequencyCounter.countFrequencies(data);
-      System.out.println("\nByte Frequencies (non-zero):");
-      for (int i = 0; i < frequency.length; i++) {
-        if (frequency[i] > 0) {
-          System.out.println(i + " : " + frequency[i]);
-        }
-      }
       HuffmanNode root = HuffmanTreeBuilder.buildTree(frequency);
       System.out.println("\nHuffman Tree built successfully.");
       System.out.println("Root Frequency: " + root.frequency);
+      Map<Integer, String> codes = HuffmanCodeGenerator.generateCodes(root);
+      System.out.println("\nGenerated Huffman Codes:");
+      for (Map.Entry<Integer, String> entry : codes.entrySet()) {
+        System.out.println(entry.getKey() + " : " + entry.getValue());
+      }
 
     } catch (IOException e) {
       System.out.println("Read Status: FAILED");

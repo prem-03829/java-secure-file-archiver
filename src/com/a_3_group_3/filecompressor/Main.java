@@ -1,5 +1,4 @@
 package com.a_3_group_3.filecompressor;
-
 import com.a_3_group_3.filecompressor.utils.FileUtils;
 import java.io.IOException;
 import java.util.Scanner;
@@ -8,6 +7,7 @@ import com.a_3_group_3.filecompressor.io.FileReaderUtil;
 import com.a_3_group_3.filecompressor.compression.HuffmanNode;
 import com.a_3_group_3.filecompressor.compression.HuffmanTreeBuilder;
 import com.a_3_group_3.filecompressor.compression.HuffmanCodeGenerator;
+import com.a_3_group_3.filecompressor.compression.HuffmanEncoder;
 import java.util.Map;
 
 public class Main {
@@ -31,6 +31,15 @@ public class Main {
       for (Map.Entry<Integer, String> entry : codes.entrySet()) {
         System.out.println(entry.getKey() + " : " + entry.getValue());
       }
+      String encodedData = HuffmanEncoder.encode(data, codes);
+      System.out.println("\nEncoded Data (first 100 bits):");
+      if (encodedData.length() > 100) {
+        System.out.println(encodedData.substring(0, 100) + "...");
+      } else {
+        System.out.println(encodedData);
+      }
+      System.out.println("\nOriginal Size (bits): " + data.length * 8);
+      System.out.println("Encoded Size (bits): " + encodedData.length());
 
     } catch (IOException e) {
       System.out.println("Read Status: FAILED");

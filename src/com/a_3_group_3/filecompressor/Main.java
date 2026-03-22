@@ -4,6 +4,8 @@ import com.a_3_group_3.filecompressor.utils.FileUtils;
 import com.a_3_group_3.filecompressor.analysis.ByteFrequencyCounter;
 import com.a_3_group_3.filecompressor.io.FileReaderUtil;
 import com.a_3_group_3.filecompressor.compression.*;
+import com.a_3_group_3.filecompressor.config.DebugConfig;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -28,19 +30,24 @@ public class Main {
         System.out.println("File is empty. Nothing to compress.");
         return;
       }
-      System.out.println("\nHuffman Tree built successfully.");
-      System.out.println("Root Frequency: " + root.frequency);
+      if (DebugConfig.SHOW_TREE_INFO) {
+        System.out.println("\nHuffman Tree built successfully.");
+        System.out.println("Root Frequency: " + root.frequency);
+      }
       Map<Integer, String> codes = HuffmanCodeGenerator.generateCodes(root);
-      System.out.println("\nGenerated Huffman Codes:");
-      for (Map.Entry<Integer, String> entry : codes.entrySet()) {
-        System.out.println(entry.getKey() + " : " + entry.getValue());
+      if (DebugConfig.SHOW_HUFFMAN_CODES) {
+        System.out.println("\nGenerated Huffman Codes:");
+        for (Map.Entry<Integer, String> entry : codes.entrySet()) {
+          System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
       }
       String encodedData = ParallelHuffmanEncoder.parallelEncode(data, codes);
-      System.out.println("\nEncoded Data (first 100 bits):");
-      if (encodedData.length() > 100) {
-        System.out.println(encodedData.substring(0, 100) + "...");
-      } else {
-        System.out.println(encodedData);
+      if (DebugConfig.SHOW_ENCODED_BITS) {
+        System.out.println("\nEncoded Data (first 100 bits):");
+        if (encodedData.length() > 100)
+          System.out.println(encodedData.substring(0, 100) + "...");
+        else
+          System.out.println(encodedData);
       }
       System.out.println("\nOriginal Size (bits): " + data.length * 8);
       System.out.println("Encoded Size (bits): " + encodedData.length());
@@ -49,6 +56,13 @@ public class Main {
       File compressed = new File(outputFile);
       System.out.println("\nCompressed File Created: " + outputFile);
       System.out.println("Compressed File Size: " + compressed.length() + " bytes");
+      long originalSize = data.length;
+      long compressedSize = compressed.length();
+      double ratio = ((double) (originalSize - compressedSize) / originalSize) * 100;
+      System.out.println("\nCompression Ratio: " + String.format("%.2f", ratio) + "%");
+      String decompressedFile = filePath + ".decoded.txt";
+      HuffmanDecoder.decodeFile(outputFile, root, decompressedFile);
+      System.out.println("\nDecompressed File Created: " + decompressedFile);
     } catch (IOException | InterruptedException | ExecutionException e) {
       System.out.println("Error occurred: " + e.getMessage());
     }

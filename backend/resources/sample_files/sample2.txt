@@ -1,0 +1,109 @@
+BYTEPRESS LOG DATASET - LARGE SCALE TEST
+
+SECTION 1: SYSTEM LOGS
+----------------------------------------
+[INFO] System initialized successfully.
+[INFO] User session started.
+[INFO] Loading modules...
+[INFO] Compression engine ready.
+[INFO] Decompression engine ready.
+[INFO] Waiting for input file...
+[INFO] Input file received.
+[INFO] Starting compression...
+
+[DEBUG] Reading file chunk...
+[DEBUG] Encoding symbols...
+[DEBUG] Building frequency table...
+[DEBUG] Generating Huffman tree...
+[DEBUG] Writing encoded data...
+
+[INFO] Compression completed.
+[INFO] Output saved successfully.
+
+----------------------------------------
+
+SECTION 2: REPEATED TEXT BLOCKS
+----------------------------------------
+Data compression is the process of encoding information using fewer bits.
+Data compression is the process of encoding information using fewer bits.
+Data compression is the process of encoding information using fewer bits.
+Data compression is the process of encoding information using fewer bits.
+Data compression is the process of encoding information using fewer bits.
+
+Lossless compression ensures no data is lost during encoding.
+Lossless compression ensures no data is lost during encoding.
+Lossless compression ensures no data is lost during encoding.
+Lossless compression ensures no data is lost during encoding.
+
+Lossy compression reduces file size by removing some information.
+Lossy compression reduces file size by removing some information.
+Lossy compression reduces file size by removing some information.
+
+----------------------------------------
+
+SECTION 3: RANDOMIZED DATA PATTERNS
+----------------------------------------
+A1B2C3D4E5F6G7H8I9J0
+Z9Y8X7W6V5U4T3S2R1Q0
+QWERTYUIOPASDFGHJKLZXCVBNM
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz
+
+1234567890123456789012345678901234567890
+9876543210987654321098765432109876543210
+
+----------------------------------------
+
+SECTION 4: PARAGRAPH TEXT
+----------------------------------------
+In computer science, data compression plays a crucial role in optimizing storage and transmission efficiency. 
+With the exponential growth of digital data, efficient compression algorithms are more important than ever. 
+Techniques such as Huffman coding, Lempel-Ziv-Welch (LZW), and Run-Length Encoding (RLE) are widely used 
+to reduce redundancy in data representation.
+
+Modern applications rely heavily on compression, including multimedia streaming, file storage, and network communication. 
+The effectiveness of a compression algorithm depends on the nature of the data being processed. Highly repetitive data 
+can be compressed significantly, whereas random data offers limited compression opportunities.
+
+----------------------------------------
+
+SECTION 5: LARGE REPETITIVE BLOCK
+----------------------------------------
+BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS
+BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS
+BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS
+BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS BYTEPRESS
+
+----------------------------------------
+
+SECTION 6: MIXED CONTENT
+----------------------------------------
+UserID: 1001 | Action: Compress | Status: Success
+UserID: 1002 | Action: Compress | Status: Success
+UserID: 1003 | Action: Decompress | Status: Success
+UserID: 1004 | Action: Compress | Status: Failed
+UserID: 1005 | Action: Compress | Status: Success
+
+UserID: 1006 | Action: Decompress | Status: Success
+UserID: 1007 | Action: Compress | Status: Success
+UserID: 1008 | Action: Compress | Status: Success
+UserID: 1009 | Action: Decompress | Status: Failed
+UserID: 1010 | Action: Compress | Status: Success
+
+----------------------------------------
+
+SECTION 7: EXPANDED REPETITION FOR HIGH COMPRESSION
+----------------------------------------
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+
+----------------------------------------
+
+END OF DATASET

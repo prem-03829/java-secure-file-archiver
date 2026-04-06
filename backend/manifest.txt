@@ -1,0 +1,1 @@
+Main-Class: com.a_3_group_3.filecompressor.Main

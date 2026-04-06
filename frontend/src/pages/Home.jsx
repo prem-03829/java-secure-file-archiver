@@ -137,17 +137,6 @@ const Home = () => {
           ))}
         </div>
       </section>
-
-      {/* Tech Stack Banner */}
-      <section className="border-y border-white/10 bg-white/5 py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
-          <span className="text-2xl font-black italic tracking-widest">REACT</span>
-          <span className="text-2xl font-black italic tracking-widest">TAILWIND</span>
-          <span className="text-2xl font-black italic tracking-widest">FRAMER</span>
-          <span className="text-2xl font-black italic tracking-widest">LUCIDE</span>
-          <span className="text-2xl font-black italic tracking-widest">VITE</span>
-        </div>
-      </section>
     </motion.div>
   );
 };

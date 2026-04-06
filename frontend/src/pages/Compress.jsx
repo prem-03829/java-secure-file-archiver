@@ -5,6 +5,7 @@ import NeonButton from '../components/UI/NeonButton';
 import GlassCard from '../components/UI/GlassCard';
 import StarBorder from '../components/UI/StarBorder';
 import GlareHover from '../components/UI/GlareHover';
+import ShapeGrid from '../components/ShapeGrid';
 import { compressFile } from '../services/api';
 
 const Compress = () => {
@@ -89,8 +90,21 @@ const Compress = () => {
   };
 
   return (
-    <div className="pt-32 pb-20 px-6 min-h-screen">
-      <div className="max-w-4xl mx-auto">
+    <div className="pt-32 pb-20 px-6 min-h-screen relative overflow-hidden">
+      {/* Background Section */}
+      <div className="absolute inset-0 z-0">
+        <ShapeGrid 
+          speed={0.5}
+          squareSize={40}
+          direction="diagonal"
+          borderColor="rgba(0, 243, 255, 0.1)"
+          hoverFillColor="rgba(0, 243, 255, 0.3)"
+          shape="square"
+          hoverTrailAmount={0}
+        />
+      </div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Compress Your Data</h1>
           <p className="text-gray-400">Drag and drop any file to optimize its storage footprint.</p>

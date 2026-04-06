@@ -1,9 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, File, X, Download, BarChart3, Clock, CheckCircle } from 'lucide-react';
 import NeonButton from '../components/UI/NeonButton';
 import GlassCard from '../components/UI/GlassCard';
 import StarBorder from '../components/UI/StarBorder';
+import GlareHover from '../components/UI/GlareHover';
 import { compressFile } from '../services/api';
 
 const Compress = () => {
@@ -12,6 +13,7 @@ const Compress = () => {
   const [progress, setProgress] = useState(0);
   const [result, setResult] = useState(null);
   const [downloadUrl, setDownloadUrl] = useState(null);
+  const abortControllerRef = useRef(null);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -22,15 +24,27 @@ const Compress = () => {
     }
   };
 
+  const handleCancel = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    setIsCompressing(false);
+    setProgress(0);
+    setFile(null);
+    setResult(null);
+  };
+
   const handleCompress = async () => {
     if (!file) return;
     
     setIsCompressing(true);
     setProgress(20); // Initial progress
     
+    abortControllerRef.current = new AbortController();
+    
     try {
       const startTime = Date.now();
-      const compressedBlob = await compressFile(file);
+      const compressedBlob = await compressFile(file, abortControllerRef.current.signal);
       const endTime = Date.now();
       
       // FIXED: Release memory by revoking previous URLs
@@ -51,10 +65,15 @@ const Compress = () => {
       });
       setProgress(100);
     } catch (error) {
-      console.error('Compression failed:', error);
-      alert('Compression failed. Make sure the backend server is running.');
+      if (error.name === 'AbortError') {
+        console.log('Compression aborted');
+      } else {
+        console.error('Compression failed:', error);
+        alert('Compression failed. Make sure the backend server is running.');
+      }
     } finally {
       setIsCompressing(false);
+      abortControllerRef.current = null;
     }
   };
 
@@ -73,75 +92,95 @@ const Compress = () => {
     <div className="pt-32 pb-20 px-6 min-h-screen">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Compress Your Data</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Compress Your Data</h1>
           <p className="text-gray-400">Drag and drop any file to optimize its storage footprint.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Upload Area */}
           <div className="md:col-span-2 space-y-6">
-            <GlassCard className="h-full flex flex-col items-center justify-center min-h-[400px] border-dashed border-2 border-white/10 hover:border-cyan-accent/50 transition-all drag-zone relative">
-              <input 
-                type="file" 
-                onChange={handleFileChange}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-              />
-              
-              {!file ? (
-                <div className="text-center pointer-events-none">
-                  <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10">
-                    <Upload className="text-cyan-accent" size={32} />
+            <GlareHover
+              glareColor="#00f3ff"
+              glareOpacity={0.2}
+              glareAngle={-30}
+              glareSize={200}
+              className="h-full"
+            >
+              <GlassCard className="h-full flex flex-col items-center justify-center min-h-[400px] border-dashed border-2 border-white/10 hover:border-cyan-accent/50 transition-all drag-zone relative">
+                <input 
+                  type="file" 
+                  onChange={handleFileChange}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
+                />
+                
+                {!file ? (
+                  <div className="text-center pointer-events-none">
+                    <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10">
+                      <Upload className="text-cyan-accent" size={32} />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-white">Select a File</h3>
+                    <p className="text-gray-500 text-sm">PDF, TXT, DOCX, or Images up to 50MB</p>
                   </div>
-                  <h3 className="text-xl font-bold mb-2">Select a File</h3>
-                  <p className="text-gray-500 text-sm">PDF, TXT, DOCX, or Images up to 50MB</p>
-                </div>
-              ) : (
-                <div className="text-center w-full px-12">
-                  <div className="w-16 h-16 bg-cyan-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <File className="text-cyan-accent" size={28} />
+                ) : (
+                  <div className="text-center w-full px-12 relative z-30">
+                    <div className="w-16 h-16 bg-cyan-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                      <File className="text-cyan-accent" size={28} />
+                    </div>
+                    <h3 className="text-lg font-bold mb-1 truncate text-white">{file.name}</h3>
+                    <p className="text-gray-500 text-sm mb-8">{(file.size / 1024).toFixed(2)} KB</p>
+                    
+                    {isCompressing ? (
+                      <div className="w-full max-w-xs mx-auto">
+                        <div className="flex justify-between text-xs mb-2">
+                          <span className="text-cyan-accent font-bold">Compressing...</span>
+                          <span className="text-white">{progress}%</span>
+                        </div>
+                        <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden mb-6">
+                          <motion.div 
+                            className="h-full bg-cyan-accent"
+                            initial={{ width: 0 }}
+                            animate={{ width: `${progress}%` }}
+                          />
+                        </div>
+                        <button 
+                          onClick={handleCancel}
+                          className="text-gray-500 hover:text-white text-sm flex items-center gap-1 mx-auto"
+                        >
+                          <X size={14} /> Cancel
+                        </button>
+                      </div>
+                    ) : result ? (
+                      <div className="flex flex-col items-center gap-4">
+                        <div className="flex items-center gap-2 text-green-400 font-bold">
+                          <CheckCircle size={20} /> Compression Complete
+                        </div>
+                        <NeonButton variant="cyan" onClick={handleDownload}>
+                          <Download size={18} /> Download .huff File
+                        </NeonButton>
+                        <button 
+                          onClick={handleCancel}
+                          className="text-gray-500 hover:text-white text-sm flex items-center gap-1"
+                        >
+                          <X size={14} /> Clear
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center gap-4">
+                        <StarBorder onClick={handleCompress} color="#00f3ff" speed="4s">
+                          Start Compression
+                        </StarBorder>
+                        <button 
+                          onClick={handleCancel}
+                          className="text-gray-500 hover:text-white text-sm flex items-center gap-1"
+                        >
+                          <X size={14} /> Clear
+                        </button>
+                      </div>
+                    )}
                   </div>
-                  <h3 className="text-lg font-bold mb-1 truncate">{file.name}</h3>
-                  <p className="text-gray-500 text-sm mb-8">{(file.size / 1024).toFixed(2)} KB</p>
-                  
-                  {isCompressing ? (
-                    <div className="w-full max-w-xs mx-auto">
-                      <div className="flex justify-between text-xs mb-2">
-                        <span className="text-cyan-accent font-bold">Compressing...</span>
-                        <span className="text-white">{progress}%</span>
-                      </div>
-                      <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                        <motion.div 
-                          className="h-full bg-cyan-accent"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${progress}%` }}
-                        />
-                      </div>
-                    </div>
-                  ) : result ? (
-                    <div className="flex flex-col items-center gap-4">
-                      <div className="flex items-center gap-2 text-green-400 font-bold">
-                        <CheckCircle size={20} /> Compression Complete
-                      </div>
-                      <NeonButton variant="cyan" onClick={handleDownload}>
-                        <Download size={18} /> Download .huff File
-                      </NeonButton>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center gap-4">
-                      <StarBorder onClick={handleCompress} color="#00f3ff" speed="4s">
-                        Start Compression
-                      </StarBorder>
-                      <button 
-                        onClick={() => setFile(null)}
-                        className="text-gray-500 hover:text-white text-sm flex items-center gap-1"
-                      >
-                        <X size={14} /> Clear
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
-            </GlassCard>
+                )}
+              </GlassCard>
+            </GlareHover>
           </div>
 
           {/* Stats / Sidebar */}

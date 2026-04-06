@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark text-white font-sans antialiased;
+  }
+}
+
+.glass-card {
+  @apply bg-dark-card backdrop-blur-md border border-white/10 rounded-2xl;
+}
+
+.neon-shadow-cyan {
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+}
+
+.neon-shadow-violet {
+  box-shadow: 0 0 20px rgba(112, 0, 255, 0.3);
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-accent to-violet-accent;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

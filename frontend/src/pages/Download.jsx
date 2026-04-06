@@ -82,8 +82,30 @@ const Download = () => {
             </motion.div>
             
             {/* Decoration Circles */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-cyan-accent/20 blur-[80px] -z-10" />
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-violet-accent/20 blur-[80px] -z-10" />
+            <motion.div 
+              animate={{
+                x: [0, 40, -20, 60, -40, 0],
+                y: [0, -60, 40, -30, 70, 0],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="absolute -top-10 -right-10 w-40 h-40 bg-cyan-accent/20 blur-[80px] -z-10" 
+            />
+            <motion.div 
+              animate={{
+                x: [0, -50, 30, -70, 40, 0],
+                y: [0, 40, -60, 50, -30, 0],
+              }}
+              transition={{
+                duration: 25,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="absolute -bottom-10 -left-10 w-40 h-40 bg-violet-accent/20 blur-[80px] -z-10" 
+            />
           </div>
         </div>
 

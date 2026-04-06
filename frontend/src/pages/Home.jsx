@@ -26,23 +26,23 @@ const Home = () => {
   const features = [
     { 
       icon: <Zap size={24} className="text-cyan-accent" />, 
-      title: "Instant Speed", 
-      desc: "Optimized priority queue logic for sub-millisecond processing."
+      title: "LZ77 + Huffman", 
+      desc: "Dual-pass hybrid engine combining sliding window dictionaries with frequency coding."
     },
     { 
       icon: <Shield size={24} className="text-cyan-accent" />, 
       title: "Lossless Trust", 
-      desc: "Bit-perfect reconstruction of every single file, every single time."
+      desc: "Bit-perfect reconstruction using Canonical Huffman tables for 100% data fidelity."
     },
     { 
       icon: <Maximize2 size={24} className="text-cyan-accent" />, 
       title: "Smart Scaling", 
-      desc: "Adapts to any file format with intelligent frequency analysis."
+      desc: "Intelligent frequency analysis that adapts to any binary or text file structure."
     },
     { 
       icon: <Layers size={24} className="text-cyan-accent" />, 
-      title: "Clean Stack", 
-      desc: "Built on modern, lean principles for maximum portability."
+      title: "Java Backend", 
+      desc: "High-performance multi-threaded core for enterprise-grade throughput."
     }
   ];
 
@@ -90,8 +90,8 @@ const Home = () => {
             className="text-gray-400 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed"
           >
             Experience the pinnacle of data efficiency with BytePress. 
-            Our advanced Huffman implementation delivers lossless compression 
-            with a premium, high-performance interface.
+            Our hybrid LZ77 and Canonical Huffman implementation delivers 
+            lossless compression with a premium, high-performance interface.
           </motion.p>
           
           <motion.div variants={itemVariants} className="flex flex-row flex-wrap justify-center gap-4">

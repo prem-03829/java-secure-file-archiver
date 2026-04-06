@@ -195,8 +195,8 @@ const Decompress = () => {
                 <RefreshCw size={18} /> Process
               </h3>
               <p className="text-gray-400 text-sm leading-relaxed">
-                Our decompressor reads the embedded Huffman Tree from your file header 
-                and reconstructs the original bitstream with 100% fidelity.
+                Our decompressor reverses the hybrid LZ77 sliding window and Canonical Huffman 
+                reconstruction to restore your original file with bit-perfect fidelity.
               </p>
             </GlassCard>
 

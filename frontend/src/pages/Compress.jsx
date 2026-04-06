@@ -208,7 +208,7 @@ const Compress = () => {
               <div className="space-y-6">
                 <div>
                   <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Algorithm</p>
-                  <p className="text-white font-medium">Huffman Adaptive</p>
+                  <p className="text-white font-medium">LZ77 + Canonical Huffman</p>
                 </div>
                 <div>
                   <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Security</p>

@@ -1,53 +1,53 @@
-# BytePress - Premium Huffman Compression SaaS
+# BytePress - High-Performance LZ77 + Huffman Archiver
 
-BytePress is a high-end, interactive web application demonstrating the power of Huffman Coding compression. Built with a focus on premium UI/UX, smooth animations, and interactive visualizations.
+BytePress is a full-stack, enterprise-grade file archiver combining the power of a Java-based compression core with a premium React-driven interface. It implements a hybrid compression strategy similar to the DEFLATE algorithm, utilizing LZ77 sliding window dictionaries followed by Canonical Huffman coding.
 
 ## 🚀 Features
 
-- **Interactive Huffman Visualizer**: Step-by-step animation of frequency calculation, node merging, and tree building.
-- **Premium UI**: Dark-themed, glassmorphic design with neon accents.
-- **Custom Cursor**: Spring-based trailing cursor with context-aware states.
-- **Simulated Compression/Decompression**: Experience the workflow with realistic stats and progress tracking.
-- **Responsive Design**: Optimized for mobile, tablet, and desktop.
-- **Framer Motion Animations**: Smooth page transitions and scroll-reveal effects.
+- **Hybrid Compression Engine**: Implements LZ77 string matching and Canonical Huffman bitstream encoding for high-efficiency lossless storage.
+- **Java Core**: High-performance backend capable of handling multi-threaded batch operations.
+- **Interactive Huffman Visualizer**: Real-time animation of tree construction and frequency analysis.
+- **Full-Stack Integration**: Real-time progress tracking via Node.js bridge to the Java execution core.
+- **Premium UI**: Dark-themed, glassmorphic design with interactive neon elements and Abort-ready workflows.
 
 ## 🛠️ Tech Stack
 
+- **Backend**: Java 17 (Compression Core)
+- **Middleware**: Node.js (Express)
 - **Frontend**: React (Vite)
 - **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
+- **Database**: PostgreSQL (Operational Logging)
 
 ## 📦 Getting Started
 
 ### Prerequisites
+- Java Development Kit (JDK) 17+
 - Node.js (v18+)
-- npm or yarn
+- PostgreSQL (Local or Supabase)
 
 ### Installation
 
-1. Install dependencies:
+1. **Backend Setup**:
    ```bash
+   cd backend/server
    npm install
    ```
 
-2. Start the development server:
+2. **Frontend Setup**:
    ```bash
-   npm run dev
+   cd frontend
+   npm install
    ```
 
-3. Build for production:
-   ```bash
-   npm run build
-   ```
+3. **Database**:
+   Configure `DATABASE_URL` in `backend/server/.env`.
+
+4. **Run**:
+   Start the backend and frontend servers to begin compressing.
 
 ## 📂 Project Structure
 
-- `src/components/HuffmanVisualizer`: Core logic and UI for the tree visualization.
-- `src/components/Cursor`: Custom interactive cursor implementation.
-- `src/hooks/useHuffman.js`: Custom hook managing the Huffman algorithm steps.
-- `src/pages`: Home, Compress, Decompress, and Download pages.
-- `src/components/UI`: Reusable glassmorphic cards and neon buttons.
-
-## ⚠️ Note
-This is a frontend-focused implementation. Compression and decompression are simulated for demonstration purposes, but the Huffman tree logic in the visualizer is 100% accurate.
+- `backend/src`: Java source for LZ77 and Huffman logic.
+- `backend/server`: Node.js Express bridge and API layer.
+- `frontend/src`: React application with interactive visualizers.
+- `frontend/src/components/UI`: Custom-built glare-ready glassmorphic components.

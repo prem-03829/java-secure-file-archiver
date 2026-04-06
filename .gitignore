@@ -1,24 +1,86 @@
-# Compiled class file
+# ==========================================
+# Frontend (React / Vite)
+# ==========================================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# ==========================================
+# Backend (Java & Node Server)
+# ==========================================
+# Java artifacts
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
 *.nar
 *.ear
+!backend/out/*.jar
+.env
+
+# Backend directory exclusions
+backend/bin/
+backend/out/
+backend/dist/
+backend/target/
+
+# Node Server artifacts
+backend/server/node_modules/
+backend/server/uploads/*
+!backend/server/uploads/.gitkeep
+backend/server/outputs/*
+!backend/server/outputs/.gitkeep
+
+# ==========================================
+# Logs & General Artifacts
+# ==========================================
+*.log
+*.tmp
+*.ctxt
+.mtj.tmp/
+hs_err_pid*
+replay_pid*
+coverage/
+dist/
+out/
+build/
+target/
+
+# Archive files
 *.zip
 *.tar.gz
 *.rar
+*.7z
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Project-specific extensions
+*.huff
+*.decoded.txt
+!backend/resources/sample_files/
+
+# ==========================================
+# IDE & System Files
+# ==========================================
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*.iml
+.project
+.classpath
+.settings/
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

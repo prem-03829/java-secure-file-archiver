@@ -125,8 +125,8 @@ const Home = () => {
           <p className="text-gray-400">Why BytePress leads the industry in data efficiency.</p>
         </div>
         
-        {/* Desktop Grid */}
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, i) => (
             <BorderGlow
               key={i}
@@ -145,28 +145,6 @@ const Home = () => {
               </GlassCard>
             </BorderGlow>
           ))}
-        </div>
-
-        {/* Mobile Scroll Stack */}
-        <div className="md:hidden h-[600px]">
-          <ScrollStack 
-            itemStackDistance={20}
-            stackPosition="15%"
-            baseScale={0.9}
-            blurAmount={2}
-          >
-            {features.map((feature, i) => (
-              <ScrollStackItem key={i} itemClassName="bg-dark-lighter border border-white/10">
-                <div className="flex flex-col gap-4 h-full">
-                  <div className="p-3 w-fit bg-white/5 rounded-2xl border border-white/10">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-2xl font-bold text-white">{feature.title}</h3>
-                  <p className="text-gray-400 text-base leading-relaxed">{feature.desc}</p>
-                </div>
-              </ScrollStackItem>
-            ))}
-          </ScrollStack>
         </div>
       </section>
 

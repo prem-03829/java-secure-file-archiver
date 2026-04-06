@@ -81,7 +81,7 @@ const Decompress = () => {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Restore Your Files</h1>
-          <p className="text-gray-400">Upload a .bp or compressed archive to decompress instantly.</p>
+          <p className="text-gray-400">Upload a .huff or compressed archive to decompress instantly.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">

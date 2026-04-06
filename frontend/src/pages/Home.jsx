@@ -4,12 +4,10 @@ import { ArrowRight, Zap, Shield, Maximize2, Layers, Download as DownloadIcon } 
 import { Link } from 'react-router-dom';
 import VisualizerContainer from '../components/HuffmanVisualizer/VisualizerContainer';
 import NeonButton from '../components/UI/NeonButton';
-import GlassCard from '../components/UI/GlassCard';
 import DecryptedText from '../components/DecryptedText';
 import ShapeGrid from '../components/ShapeGrid';
 import StarBorder from '../components/UI/StarBorder';
-import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
-import BorderGlow from '../components/UI/BorderGlow';
+import GlassCard from '../components/UI/GlassCard';
 
 const Home = () => {
   const containerVariants = {
@@ -27,22 +25,22 @@ const Home = () => {
 
   const features = [
     { 
-      icon: <Zap className="text-yellow-400" />, 
+      icon: <Zap size={24} className="text-cyan-accent" />, 
       title: "Instant Speed", 
       desc: "Optimized priority queue logic for sub-millisecond processing."
     },
     { 
-      icon: <Shield className="text-cyan-accent" />, 
+      icon: <Shield size={24} className="text-cyan-accent" />, 
       title: "Lossless Trust", 
       desc: "Bit-perfect reconstruction of every single file, every single time."
     },
     { 
-      icon: <Maximize2 className="text-violet-accent" />, 
+      icon: <Maximize2 size={24} className="text-cyan-accent" />, 
       title: "Smart Scaling", 
       desc: "Adapts to any file format with intelligent frequency analysis."
     },
     { 
-      icon: <Layers className="text-blue-400" />, 
+      icon: <Layers size={24} className="text-cyan-accent" />, 
       title: "Clean Stack", 
       desc: "Built on modern, lean principles for maximum portability."
     }
@@ -125,25 +123,17 @@ const Home = () => {
           <p className="text-gray-400">Why BytePress leads the industry in data efficiency.</p>
         </div>
         
-        {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, i) => (
-            <BorderGlow
-              key={i}
-              glowColor="180 100 50"
-              colors={['#00f3ff', '#7000ff', '#00f3ff']}
-              borderRadius={24}
-              edgeSensitivity={20}
-              glowRadius={30}
-            >
-              <GlassCard className="flex flex-col gap-4 h-full border-none !bg-transparent">
-                <div className="p-3 w-fit bg-white/5 rounded-2xl border border-white/10">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-bold text-white">{feature.title}</h3>
+            <GlassCard key={i} className="flex flex-col gap-6">
+              <div className="w-12 h-12 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl">
+                {feature.icon}
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{feature.desc}</p>
-              </GlassCard>
-            </BorderGlow>
+              </div>
+            </GlassCard>
           ))}
         </div>
       </section>

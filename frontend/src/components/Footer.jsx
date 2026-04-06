@@ -18,14 +18,8 @@ const Footer = () => {
             Compress intelligence into every byte with our premium SaaS tools.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-cyan-accent hover:text-dark transition-all">
+            <a href="https://github.com/prem-03829/java-secure-file-archiver" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-cyan-accent hover:text-dark transition-all">
               <Github size={20} />
-            </a>
-            <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-cyan-accent hover:text-dark transition-all">
-              <Twitter size={20} />
-            </a>
-            <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-cyan-accent hover:text-dark transition-all">
-              <Linkedin size={20} />
             </a>
           </div>
         </div>
